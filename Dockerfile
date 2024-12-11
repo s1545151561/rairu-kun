@@ -5,11 +5,12 @@ ARG REGION=re
 ENV re=${re}
 ENV Password=${Password}
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt update && apt-get install sudo && apt-get install curl && apt-get install wget && apt upgrade -y && apt install -y \
+RUN apt update && apt upgrade -y && apt install -y \
     ssh wget unzip vim curl python3
 RUN wget -q https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz -O /ngrok-v3-stable-linux-amd64.tgz\
     && cd / && tar -xzvf ngrok-v3-stable-linux-amd64.tgz \
     && chmod +x ngrok
+RUN apt-get install sudo && apt-get install curl && apt-get install wget
 RUN mkdir /run/sshd \
     && echo "/ngrok tcp --authtoken ${NGROK_TOKEN} --region ${REGION} 22 &" >>/openssh.sh \
     && echo "sleep 5" >> /openssh.sh \
