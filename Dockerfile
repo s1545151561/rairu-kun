@@ -1,6 +1,9 @@
 FROM debian
 ARG NGROK_TOKEN
-ARG REGION=ap
+ARG Password
+ARG REGION=re
+ENV re=${re}
+ENV Password=${Password}
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt-get install sudo && apt-get install curl && apt-get install wget && apt upgrade -y && apt install -y \
     ssh wget unzip vim curl python3
